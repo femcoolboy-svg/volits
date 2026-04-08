@@ -7,10 +7,14 @@ import os
 import random
 import string
 from datetime import datetime
+import logging
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(24)
-socketio = SocketIO(app, cors_allowed_origins="*")
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(24))
+app.config['SESSION_TYPE'] = 'filesystem'
+
+# Настройка для продакшена
+socketio = SocketIO(app, cors_allowed_origins="*", logger=False, engineio_logger=False)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -46,6 +50,7 @@ def init_db():
     conn.commit()
     conn.close()
 
+# Initialize database
 init_db()
 
 class User(UserMixin):
@@ -266,4 +271,5 @@ def handle_disconnect():
         socketio.emit('status_update', {'user': current_user.username, 'status': 'offline'}, broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    socketio.run(app, host='0.0.0.0', port=port, debug=False)
