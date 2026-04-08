@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOlits - Современный мессенджер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="landing-page">
+    <div class="particles-bg"></div>
+    
+    <div class="landing-container">
+        <div class="glass-card auth-card">
+            <div class="logo-animation">
+                <h1 class="glitch-text" data-text="VOlits">VOlits</h1>
+                <p class="tagline">Общайся в реальном времени</p>
+            </div>
+            
+            <div class="auth-toggle">
+                <button class="toggle-btn active" data-form="login">Вход</button>
+                <button class="toggle-btn" data-form="register">Регистрация</button>
+            </div>
+            
+            <form id="login-form" class="auth-form active">
+                <div class="input-group">
+                    <input type="text" id="login-username" placeholder="Логин" required>
+                    <i class="input-icon">👤</i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Пароль" required>
+                    <i class="input-icon">🔒</i>
+                </div>
+                <div class="captcha-container">
+                    <div class="captcha-code" id="login-captcha-display"></div>
+                    <input type="text" id="login-captcha" placeholder="Введите код с картинки" required>
+                </div>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="remember-me">
+                    <span>Запомнить меня</span>
+                </label>
+                <button type="submit" class="btn-primary">Войти</button>
+            </form>
+            
+            <form id="register-form" class="auth-form">
+                <div class="input-group">
+                    <input type="text" id="reg-username" placeholder="Логин" required>
+                    <i class="input-icon">👤</i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="reg-password" placeholder="Пароль" required>
+                    <i class="input-icon">🔒</i>
+                </div>
+                <div class="captcha-container">
+                    <div class="captcha-code" id="reg-captcha-display"></div>
+                    <input type="text" id="reg-captcha" placeholder="Введите код с картинки" required>
+                </div>
+                <button type="submit" class="btn-primary">Создать аккаунт</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>
