@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOlits - Чат</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="chat-page">
+    <div class="chat-container">
+        <!-- Left Sidebar -->
+        <div class="chat-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="avatar-circle" id="current-avatar">
+                        {{ username[0]|upper }}
+                    </div>
+                    <div class="user-details">
+                        <span class="username">{{ username }}</span>
+                        <span class="user-status" id="user-status">Онлайн</span>
+                    </div>
+                </div>
+                <button class="menu-btn" id="menuBtn">☰</button>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" id="searchUsers" placeholder="Поиск чатов...">
+                <i class="search-icon">🔍</i>
+            </div>
+            
+            <div class="users-list" id="usersList">
+                <!-- Users will be loaded here -->
+            </div>
+        </div>
+        
+        <!-- Chat Area -->
+        <div class="chat-main">
+            <div class="chat-header" id="chatHeader">
+                <div class="chat-user-info">
+                    <div class="avatar-circle small" id="chat-avatar">🤖</div>
+                    <div>
+                        <h3 id="chatUsername">Выберите чат</h3>
+                        <span class="chat-status" id="chatStatus"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="messages-area" id="messagesArea">
+                <div class="welcome-message">
+                    <h2>Добро пожаловать в VOlits!</h2>
+                    <p>Выберите собеседника, чтобы начать общение</p>
+                </div>
+            </div>
+            
+            <div class="message-input-area">
+                <input type="text" id="messageInput" placeholder="Введите сообщение..." disabled>
+                <button id="sendBtn" disabled>➤</button>
+            </div>
+        </div>
+        
+        <!-- Right Profile Panel -->
+        <div class="profile-panel" id="profilePanel">
+            <div class="profile-header">
+                <button class="close-profile" id="closeProfile">✕</button>
+                <h3>Профиль</h3>
+            </div>
+            <div class="profile-content">
+                <div class="profile-avatar" id="profileAvatar">
+                    {{ username[0]|upper }}
+                </div>
+                <h4 id="profileUsername">{{ username }}</h4>
+                <p class="profile-id">ID: {{ user_id }}</p>
+                
+                <div class="status-selector">
+                    <label>Статус</label>
+                    <select id="statusSelect">
+                        <option value="online">🟢 Онлайн</option>
+                        <option value="away">🌙 Не активен</option>
+                        <option value="busy">🔴 Занят</option>
+                    </select>
+                </div>
+                
+                <button class="logout-btn" id="logoutBtn">Выйти</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        window.currentUser = "{{ username }}";
+        window.userId = {{ user_id }};
+    </script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>
